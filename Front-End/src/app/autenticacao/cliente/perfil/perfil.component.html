@@ -1,0 +1,90 @@
+<!--Formulario de cadastro-->
+
+<div class="formulario" *ngIf="controlePDF===false">
+    <div style="text-align: center; margin-top: 1%;">
+        <h1>Alterar Perfil</h1>
+    </div>
+    <form (ngSubmit)="registrarUsuario(form)" #form="ngForm">
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" id="name" name="name" [(ngModel)]="conta.nome" disabled>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" id="email" name="email" [(ngModel)]="conta.email" disabled>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Rua</mat-label>
+            <input matInput type="text" id="rua" name="rua" [(ngModel)]="conta.rua" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Numero</mat-label>
+            <input matInput type="text" id="numero" name="numero" [(ngModel)]="conta.numero" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Cidade</mat-label>
+            <input matInput type="text" id="cidade" name="cidade" [(ngModel)]="conta.cidade" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="tel" id="telefone" name="telefone" maxlength="11" [(ngModel)]="conta.telefone"
+                required>
+        </mat-form-field>
+        <br>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.form.valid">Alterar dados </button>
+        <button mat-raised-button color="primary" type="submit" (click)="altPDF()" style="margin-left: 1%;"> Voltar
+            PDF</button>
+    </form>
+
+</div>
+
+<div class="formulario" *ngIf="controlePDF===true">
+    <form id="content" #content *ngFor="let aux of cliente" style="margin-bottom: 2%;">
+        <div style="margin-top: 3%;">
+            <h1>Dados pessoais do paciente {{aux.nome}}</h1>
+        </div>
+        <mat-form-field appearance="fill">
+            <tr>
+                <td>Nome:</td>
+                <td>{{aux.nome}}</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Email:</td>
+                <td>{{aux.email}}</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Rua:</td>
+                <td>{{aux.rua}}</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Numero: </td>
+                <td>{{aux.numero}}</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Cidade:</td>
+                <td>{{aux.cidade}}</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Telefone:</td>
+                <td>{{aux.telefone}}</td>
+            </tr>
+       </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" (click)="gerarPDF()">Imprimir PDF</button>
+    <button mat-raised-button color="warn" type="submit" style="margin-left: 1%;" (click)="altPerfil()"> Alterar dados
+    </button>
+</div>

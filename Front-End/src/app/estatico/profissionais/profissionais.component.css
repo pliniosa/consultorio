@@ -1,0 +1,20 @@
+.titulo{
+    font-size: 30pt;
+    text-align:center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+  
+hr{
+    margin-top: -20px;
+    color: #589fa5;
+    background-color: #589fa5;
+    height: 2px;
+    width: 240px;
+}
+
+a {
+    background-color: #f0f0f0;
+    width: 100%;
+}
+

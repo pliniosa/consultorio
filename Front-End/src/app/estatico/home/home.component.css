@@ -1,0 +1,43 @@
+mat-grid-list{
+    margin-top: 1%;
+}
+
+p, mat-card-title{    
+    text-align: justify;
+    margin: 0;
+}
+
+p img{
+    margin: 0 0 0 25%;
+}
+
+h1{
+    text-align: center;
+}
+
+.pag2{
+    background: #c6bdb8;
+}
+
+.card {
+    text-align: center;
+    color: black;
+    max-width: 400px;
+}
+
+.card2{
+    text-align: center;
+    color: black;
+    max-width: 400px;
+    background-color: #c6bdba;
+}
+  
+@media screen and (max-width: 600px) {
+    .column, input[type=submit] {
+      width: 100%;
+      margin: auto;
+    }
+    .teste {
+        width: 100px;
+    }
+}

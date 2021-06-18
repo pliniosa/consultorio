@@ -1,0 +1,118 @@
+<mat-grid-list  #grid [cols]="cols" rowHeight="20:11">
+
+    <mat-grid-tile *ngIf="cols===2">
+        <div>
+            <p><img src="../../assets/img/Ronco.jpg" style="max-width: 400px; margin: auto;"></p>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="cols===1">
+        <div>
+            <p><img src="../../assets/img/Ronco.jpg" style="max-width: 250px; margin: auto;"></p>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="card">
+            <h1>Ronco e Apnéia</h1>
+            <p>
+                O Ronco atinge cerca de 30% das pessoas, prejudicando relacionamentos e gerando constrangimento.
+            </p>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="cols===1">
+        <div class="card">
+            <p><img class= "teste" style=" width: 50%; margin-left: 25%;" src="../../assets/img/Dentes tortos.jpg"></p>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="card">
+            <h1>Dentes apinhados (tortos)</h1>
+            <p>
+                Mais popularmente conhecido como dentes encavalados. Acontece quando há dentes grandes
+                para um maxilar pequeno. Além de comprometer a estética do sorriso, ainda dificulta a
+                higienização e
+                pode gerar problemas periodontais (gengivais).
+            </p>
+        </div>
+    </mat-grid-tile>
+    
+    <mat-grid-tile *ngIf="cols===2">
+        <div class="card">
+            <p><img class= "teste" style=" width: 70%; margin-left: 25%;" src="../../assets/img/Dentes tortos.jpg"></p>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile  *ngIf="cols===2">
+        <div class="card">
+            <p><img style="width: 40%;" src="../../assets/img/carie.jpg"></p>
+        </div>
+    </mat-grid-tile>
+    
+    <mat-grid-tile  *ngIf="cols===1">
+        <div class="card">
+            <p><img style="width: 30%; margin-left: 25%;" src="../../assets/img/carie.jpg"></p>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="card">
+            <h1>Cárie</h1>
+            <p>
+                Se você descobriu que tem cáries ainda no início, menos mal. Um tratamento com flúor ajudará a
+                evitar que as bactérias continuem maltratando o dente e, em outros casos mais graves, a
+                restauração pode ser indicada.
+            </p>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<mat-grid-list  #grid [cols]="cols" rowHeight="20:13" class="pag2" *ngIf="cols===2">
+    <br>
+    <h1><b>Prevenir é o melhor remedio</b></h1>
+    <mat-grid-tile>
+
+        <mat-card class="card2">
+
+            <mat-card-header>
+                <mat-card-title>Fique de olho na sua alimentação</mat-card-title>
+                <br>
+            </mat-card-header>
+            <mat-card-content>
+                <br>
+                <p>
+                    Sim, o que você come diz muito sobre você e sua saúde, não é apenas um ditado
+                    popular. A alimentação está diretamente ligada à sua saúde bucal e, por isso, merece uma atenção
+                    maior. Uma dieta rica em fibras, por exemplo, é um forte aliado para seus dentes e gengivas se
+                    manterem saudáveis. Por outro lado, os carboidratos e itens abundantes em sacarose não são os
+                    recomendados diariamente no seu prato. Isto porque, esses alimentos são ricos em diferentes
+                    tipos de açúcar, podendo resultando no aparecimento do grande vilão cárie.
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card class="card2">
+            
+            <mat-card-header>
+                <mat-card-title>O fio dental é indispensável</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    Pensa que apenas a escovação consegue fazer a higiene completa? Não é bem assim. A escova de
+                    dentes tem sua devida importância na higiene bucal, contudo, o fio dental é um item
+                    indispensável. Só ele consegue alcançar os espaços entre os dentes, onde as cerdas não chegam.
+                    Além disso, ele ajuda na remoção da placa bacteriana e restos de alimentos presos. E então, o
+                    fio dental consegue fazer uma limpeza subgengival e prevenir problemas bucais, como a gengivite,
+                    mau hálito e manchas nos dentes, por exemplo. Existem diferentes modelos disponíveis,
+                    encaixando-se perfeitamente às necessidades de cada paciente.
+                </p>
+            </mat-card-content>
+         
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

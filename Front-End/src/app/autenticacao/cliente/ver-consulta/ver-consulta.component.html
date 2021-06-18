@@ -1,0 +1,44 @@
+<h1 style="text-align: center; margin-top: 2%;">Agenda</h1>
+
+<div style="margin: 3% 1% 2% 1%;">
+    <!--Tabela-->
+
+    <table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> No </th>
+            <td mat-cell *matCellDef="let index = index"> {{index+1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paciente">
+            <th mat-header-cell *matHeaderCellDef > Paciente </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="profissional">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Dentista </th>
+            <td mat-cell *matCellDef="let element"> {{element.profissional}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="data">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+            <td mat-cell *matCellDef="let element"> {{element.data| date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hora">
+            <th mat-header-cell *matHeaderCellDef> Horario </th>
+            <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+        </ng-container>
+
+        <ng-container  matColumnDef="star" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button *ngIf ="(fullDay < element.data)" mat-button (click)="deleteAgenda(element.data)"><mat-icon>delete</mat-icon></button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" [showFirstLastButtons]="true"></mat-paginator>

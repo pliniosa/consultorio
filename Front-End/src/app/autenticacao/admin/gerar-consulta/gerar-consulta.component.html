@@ -1,0 +1,286 @@
+<div class="titulo">
+    <h1>Registrar Consulta</h1>
+    <br>
+    <button mat-raised-button color="primary" (click)="ativarCadastro()">Cadastrar nova consulta</button>
+    <button mat-raised-button color="accent" style="margin-left: 2%;" (click)="listar()">Listar consultas</button>
+    <button mat-raised-button color="warn" style="margin-left: 2%;" (click)="gerarPDF()"
+        *ngIf="controle==0">Imprimir</button>
+</div>
+
+<div style="margin-bottom: 3%;" *ngIf="controle===0">
+    <br>
+</div>
+<div style="margin-top: 3%;" *ngIf="controle!=0">
+    <br>
+</div>
+
+<div class="formulario" *ngIf="controle === 1">
+    <form (ngSubmit)="registrarConsulta(form)" #form="ngForm">
+        <mat-tab-group mat-align-tabs="center">
+
+
+            <mat-tab label="Cadastro Paciente">
+                <br style="margin-top:1%">
+                <label>Usuario possui cadastro</label>
+                <br>
+                <mat-radio-group>
+                    <input type="radio" id="sim" name="fimT" value="0" [(ngModel)]="outro" required>
+                    <label for="male">Sim</label>
+                    <input type="radio" id="nao" name="fimT" value="1" [(ngModel)]="outro" required>
+                    <label for="female">Nao</label><br>
+                </mat-radio-group>
+                <br>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Paciente</mat-label>
+                    <mat-select [(ngModel)]="consulta.nome" name="nome" *ngIf="outro==0" required>
+                        <mat-option *ngFor="let cliente of clientes" [value]="cliente.nome">
+                            {{cliente.nome}}
+                        </mat-option>
+                    </mat-select>
+
+                    <input matInput type="text" id="name" name="name" *ngIf="outro ==1" [(ngModel)]="consulta.nome"
+                        required>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Servico</mat-label>
+                    <mat-select [(ngModel)]="consulta.servicoPrestado" name="servico" required>
+                        <mat-option *ngFor="let data of datas" [value]="data.value">
+                            {{data.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-tab>
+            <mat-tab label="Cadastro Horario">
+                <mat-form-field appearance="fill" style="margin-top:2%">
+                    <mat-label>Hora</mat-label>
+                    <mat-select [(ngModel)]="consulta.horario" name="horarios" required>
+                        <mat-option *ngFor="let horarios of hora" [value]="horarios.hora">
+                            {{horarios.hora}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <label>Compareceu</label>
+                <br>
+
+                <mat-radio-group>
+                    <input type="radio" id="sim" name="compareceu" value="sim" [(ngModel)]="consulta.compareceu"
+                        required>
+                    <label for="male">Sim</label>
+                    <input type="radio" id="nao" name="compareceu" value="nao" [(ngModel)]="consulta.compareceu"
+                        required>
+                    <label for="female">Nao</label><br>
+                </mat-radio-group>
+                <br>
+                <label>Final Do Tratamento</label>
+                <br>
+                <mat-radio-group>
+                    <input type="radio" id="sim" name="fimT" value="sim" [(ngModel)]="consulta.finalTratamento"
+                        required>
+                    <label for="male">Sim</label>
+                    <input type="radio" id="nao" name="fimT" value="nao" [(ngModel)]="consulta.finalTratamento"
+                        required>
+                    <label for="female">Nao</label><br>
+                </mat-radio-group>
+
+            </mat-tab>
+            <mat-tab label="Confirmar Dados">
+
+                <mat-card class="example-card" style="margin-top:2%">
+                    <mat-card-header style="margin-left: 17%;">
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title><b>Odonto Clinica</b></mat-card-title>
+                        <mat-card-subtitle><b>Dados da consulta</b></mat-card-subtitle>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <p><b>Paciente:</b> {{consulta.nome}}</p>
+                        <p><b>Servico:</b> {{consulta.servicoPrestado}}</p>
+                        <p><b>Horario:</b> {{consulta.horario}}</p>
+                        <p><b>Compareceu:</b> {{consulta.compareceu}}</p>
+                        <p><b>Tratamento Finalizado:</b> {{consulta.finalTratamento}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="registerbtn" type="submit"
+                            [disabled]="!form.form.valid">Registrar</button>
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+            </mat-tab>
+        </mat-tab-group>
+    </form>
+</div>
+
+<div class="formulario" *ngIf="controle === 2">
+    <form (ngSubmit)="editarConsulta(form)" #form="ngForm">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Cadastro Paciente">
+                <mat-form-field appearance="fill" class="full-width" style="margin-top:2%">
+                    <mat-label>Paciente</mat-label>
+                    <input matInput type="text" id="name" name="name" [(ngModel)]="consulta.nome" required>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Servico</mat-label>
+                    <mat-select [(ngModel)]="consulta.servicoPrestado" name="servico" required>
+                        <mat-option *ngFor="let data of datas" [value]="data.value">
+                            {{data.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-tab>
+            <mat-tab label="Cadastro Horario">
+                <mat-form-field appearance="fill" style="margin-top:2%">
+                    <mat-label>Hora</mat-label>
+                    <mat-select [(ngModel)]="consulta.horario" name="horarios" required>
+                        <mat-option *ngFor="let horarios of hora" [value]="horarios.hora">
+                            {{horarios.hora}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <label>Compareceu</label>
+                <br>
+
+                <mat-radio-group>
+                    <input type="radio" id="sim" name="compareceu" value="sim" [(ngModel)]="consulta.compareceu"
+                        required>
+                    <label for="male">Sim</label>
+                    <input type="radio" id="nao" name="compareceu" value="nao" [(ngModel)]="consulta.compareceu"
+                        required>
+                    <label for="female">Nao</label><br>
+                </mat-radio-group>
+                <br>
+                <label>Final Do Tratamento</label>
+                <br>
+                <mat-radio-group>
+                    <input type="radio" id="sim" name="fimT" value="sim" [(ngModel)]="consulta.finalTratamento"
+                        required>
+                    <label for="male">Sim</label>
+                    <input type="radio" id="nao" name="fimT" value="nao" [(ngModel)]="consulta.finalTratamento"
+                        required>
+                    <label for="female">Nao</label><br>
+                </mat-radio-group>
+
+            </mat-tab>
+            <mat-tab label="Confirmar Dados">
+
+                <mat-card class="example-card" style="margin-top:2%">
+                    <mat-card-header style="margin-left: 17%;">
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title><b>Odonto Clinica</b></mat-card-title>
+                        <mat-card-subtitle><b>Confirmação dos dados</b></mat-card-subtitle>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <p><b>Paciente:</b> {{consulta.nome}}</p>
+                        <p><b>Servico:</b> {{consulta.servicoPrestado}}</p>
+                        <p><b>Horario:</b> {{consulta.horario}}</p>
+                        <p><b>Compareceu:</b> {{consulta.compareceu}}</p>
+                        <p><b>Tratamento Finalizado:</b> {{consulta.finalTratamento}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="registerbtn" type="submit"
+                            [disabled]="!form.form.valid">Atualizar</button>
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+            </mat-tab>
+        </mat-tab-group>
+    </form>
+</div>
+
+<div id="divChart" style="margin: 0 1% 2% 1%;" *ngIf="controle === 0">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> No </th>
+            <td mat-cell *matCellDef="let index = index"> {{index+1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Paciente </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="horario">
+            <th mat-header-cell *matHeaderCellDef> Horario </th>
+            <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="servicoPrestado">
+            <th mat-header-cell *matHeaderCellDef> Servico </th>
+            <td mat-cell *matCellDef="let element"> {{element.servicoPrestado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="compareceu">
+            <th mat-header-cell *matHeaderCellDef> Compareceu </th>
+            <td mat-cell *matCellDef="let element"> {{element.compareceu}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="finalTratamento">
+            <th mat-header-cell *matHeaderCellDef> Finalizado </th>
+            <td mat-cell *matCellDef="let element"> {{element.finalTratamento}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="data">
+            <th mat-header-cell *matHeaderCellDef> Data </th>
+            <td mat-cell *matCellDef="let element"> {{element.createAt | date:"dd/MM/yy"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editar" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>Editar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="getConsultaUm(element._id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="visualizar" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>visualizar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="visualizar(element._id)">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deletar" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>Deletar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="deleteConsulta(element._id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</div>
+<div style="margin-bottom: 6%;" *ngIf="controle==0 || controle==1 || controle==2">
+    <br>
+</div>
+
+<div *ngIf="controle==3">
+    <mat-card class="example-card" style="margin-top:2%">
+        <mat-card-header style="margin-left: 17%;">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title><b>Odonto Clinica</b></mat-card-title>
+            <mat-card-subtitle><b>Confirmação dos dados</b></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p><b>Paciente:</b> {{consulta.nome}}</p>
+            <p><b>Servico:</b> {{consulta.servicoPrestado}}</p>
+            <p><b>Horario:</b> {{consulta.horario}}</p>
+            <p><b>Compareceu:</b> {{consulta.compareceu}}</p>
+            <p><b>Tratamento Finalizado:</b> {{consulta.finalTratamento}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="warn" class="registerbtn" type="submit"
+                (click)="listar()">Voltar</button>
+        </mat-card-actions>
+    </mat-card>
+    <br>
+</div>
+
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" [showFirstLastButtons]="true" *ngIf="controle==0"></mat-paginator>

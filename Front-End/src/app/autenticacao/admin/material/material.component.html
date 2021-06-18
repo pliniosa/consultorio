@@ -1,0 +1,159 @@
+<div class="titulo">
+    <h1>Material</h1>
+    <br>
+    <button mat-raised-button color="primary" (click)="ativarCadastro()">Cadastrar compra de material</button>
+    <button mat-raised-button color="accent" style="margin-left: 2%;" (click)="listar()">Listar material</button>
+    <button mat-raised-button color="warn" style="margin-left: 2%;" (click)="gerarPDF('divChart')" *ngIf="controle==1">Imprimir</button>
+</div>
+
+<div style="margin-bottom: 3%;" *ngIf="controle===0">
+    <br>
+</div>
+<div style="margin-top: 3%;" *ngIf="controle!=0">
+    <br>
+</div>
+
+<div class="formulario" *ngIf="controle===0">
+    <form (ngSubmit)="registrarMaterial(form)" #form="ngForm">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" id="name" name="name" [(ngModel)]="material.nome" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Preco</mat-label>
+            <input matInput type="text" id="preco" name="preco" [(ngModel)]="material.precoUnitario" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Quantidade</mat-label>
+            <input matInput type="text" id="quantidade" name="quantidade" [(ngModel)]="material.quantidade" required>
+        </mat-form-field>
+
+        <br>
+        <button mat-raised-button color="primary" class="registerbtn" type="submit"
+            [disabled]="!form.form.valid">Registrar</button>
+    </form>
+</div>
+
+<div id="divChart" style="margin: 0 1% 2% 1%;" *ngIf="controle === 1">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> No </th>
+            <td mat-cell *matCellDef="let index = index"> {{index+1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="preco">
+            <th mat-header-cell *matHeaderCellDef> Preco Unitario </th>
+            <td mat-cell *matCellDef="let element"> {{element.precoUnitario}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantidade">
+            <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="data">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Solicitação </th>
+            <td mat-cell *matCellDef="let element"> {{element.createAt | date:"dd/MM/yyyy"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editar" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>Editar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="getConsultaUm(element._id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="visualizar" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>Visualizar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="visualizarUm(element._id)">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deletar" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>Deletar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="deleteConsulta(element._id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Nenhum dado encontrado com a palavra "{{input.value}}"</td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="formulario" *ngIf="controle===2">
+    <form (ngSubmit)="editarConsulta(form)" #form="ngForm">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" id="name" name="name" [(ngModel)]="material.nome" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Preco</mat-label>
+            <input matInput type="text" id="preco" name="preco" [(ngModel)]="material.precoUnitario" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Quantidade</mat-label>
+            <input matInput type="text" id="quantidade" name="quantidade" [(ngModel)]="material.quantidade" required>
+        </mat-form-field>
+
+        <br>
+        <button mat-raised-button color="primary" class="registerbtn" type="submit"
+            [disabled]="!form.form.valid">Registrar</button>
+    </form>
+</div>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" [showFirstLastButtons]="true" *ngIf="controle!=3"></mat-paginator>
+
+
+<div class="formulario" *ngIf="controle===3">
+
+    <mat-card id="cartaoMaterial" class="example-card" style="margin-top:2%">
+        <mat-card-header style="margin-left: 17%;">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title ><b>Odonto Clinica</b></mat-card-title>
+            <mat-card-subtitle><b>Dados do Produto</b></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p><b>Nome do Produto:</b> {{material.nome}}</p>
+            <p><b>Preço Unitario:</b> R$ {{material.precoUnitario}}</p>
+            <p><b>Quantidade Adiquirida:</b> {{material.quantidade}}</p>
+            <p><b>Total a Pagar:</b> {{material.total}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            
+        </mat-card-actions>
+    </mat-card>
+    <button mat-raised-button color="primary" class="registerbtn" type="submit"
+    (click)="listar()">Voltar</button>
+    <button mat-raised-button color="warn" style="margin-left: 2%;" (click)="gerarPDF('cartaoMaterial')">Imprimir</button>
+<div style="margin-top: 4%;"*ngIf="controle===3">
+    <br>
+</div>

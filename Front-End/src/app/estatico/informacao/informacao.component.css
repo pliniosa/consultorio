@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+    
+  /* Float four columns side by side */
+.column {
+    float: left;
+    width: 25%;
+    margin: 2% 0 1% 0;
+}
+  
+.icon{
+    width: 40px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card {
+    text-align: center;
+    color: black;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+      width: 50%;
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 10px;   
+    }
+}
+    

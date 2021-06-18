@@ -1,0 +1,55 @@
+<div class="titulo">
+    <h1>Profissionais Cadastrados</h1>
+    <br>
+    <button mat-raised-button color="primary" (click)="ativarCadastro()">Cadastrar novo dentista</button>
+    <button mat-raised-button color="warn" style= "margin-left: 2%;" (click)="ativarDelete()">Excluir dentista</button>
+    <button mat-raised-button color="accent" style= "margin-left: 2%;" (click)="listar()">Listar dentista</button>
+</div>
+<div style="margin-bottom: 23%;" *ngIf="controle===0">
+    <br>
+</div>
+<div style="margin-top: 3%;" *ngIf="controle!=0">
+    <br>
+</div>
+<form class="formulario" *ngIf="controle === 1" (ngSubmit)="registrarProfissional(form)" #form="ngForm">
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nome do Dentista</mat-label>
+        <input matInput type="text" id="name" name="name" [(ngModel)]="profissional.nome" required>
+    </mat-form-field>
+<br>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>CRO</mat-label>
+        <input matInput type="text" id="numero" name="numero" [(ngModel)]="profissional.cro" required>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" class="registerbtn" type="submit"
+    [disabled]="!form.form.valid">Cadastrar</button>
+</form>
+
+<form class="formulario" *ngIf="controle === 2" (ngSubmit)="deletarProfissional(form)" #form="ngForm">
+
+    <mat-form-field appearance="fill">
+        <mat-label>CRO</mat-label>
+        <input matInput type="text" id="numero" name="numero" [(ngModel)]="profissional.cro" required>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" class="registerbtn" type="submit"
+    [disabled]="!form.form.valid">Excluir</button>
+</form>
+
+<div class="formProf" *ngIf="controle === 3">
+    <tr *ngFor="let profissional of profissionais">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput value="{{profissional.nome}}" disabled>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>CRO</mat-label>
+            <input matInput value="{{profissional.cro}}"disabled>
+        </mat-form-field>
+    </tr>
+</div>
+
+<div style="margin-bottom: 10%;" *ngIf="controle != 0">
+    <br>
+</div>

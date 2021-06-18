@@ -1,0 +1,62 @@
+<div style="text-align: center; margin-top: 1%;">
+    <h1>Cadastro</h1>
+</div>
+
+
+<!--Formulario de cadastro-->
+
+<div class="formulario">
+    <form (ngSubmit)="registrarUsuario(form)" #form="ngForm">
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" id="name" name="name" [(ngModel)]="conta.nome" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Rua</mat-label>
+            <input matInput type="text" id="rua" name="rua" [(ngModel)]="conta.rua" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Numero</mat-label>
+            <input matInput type="text" id="numero" name="numero" [(ngModel)]="conta.numero" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Cidade</mat-label>
+            <input matInput type="text" id="cidade" name="cidade" [(ngModel)]="conta.cidade" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="tel" id="telefone" name="telefone" maxlength="11" [(ngModel)]="conta.telefone"
+                required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" id="email" name="email" [formControl]="email" [(ngModel)]="conta.email"
+                required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill" class="cadastro">
+            <mat-label>Senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" id="senha" name="senha" [(ngModel)]="conta.senha"
+                required>
+
+            <mat-icon mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"[attr.aria-pressed]="hide">
+                {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+        </mat-form-field>
+        <br>
+
+        <button mat-raised-button color="primary" class="registerbtn" type="submit" [disabled]="!form.form.valid">Registrar</button>
+    </form>
+</div>

@@ -1,0 +1,161 @@
+<mat-toolbar style="padding: 1%;">
+    <!--IF para pag abaixo de 960px-->
+    <mat-toolbar style="margin: 18% 0 11% 0;" *ngIf="innerWidth <  960px">
+        <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <img style="width: 80%; max-width: 300px; margin: 0 0 0 2%;" src="../../../assets/img/Logo.jpeg">
+        <span class="example-spacer"></span>
+        <button mat-button color="warn" *ngIf="auth===true" (click)=deslogar()><span>Logout</span></button>
+        <app-logar *ngIf="auth===false && innerWidth <  960px "></app-logar>
+    </mat-toolbar>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="toHome()"  *ngIf="adm===false">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+
+        <button mat-menu-item (click)="toServico()" *ngIf="adm===false">
+            <mat-icon>airline_seat_recline_extra</mat-icon>
+            <span>Serviços</span>
+        </button>
+
+        <button mat-menu-item (click)="toCorpoClinico()" *ngIf="adm===false">
+            <mat-icon>person</mat-icon>
+            <span>Corpo Clinico</span>
+        </button>
+
+        <button mat-menu-item (click)="toContateNos()" *ngIf="auth===false && adm===false">
+            <mat-icon>settings_phone</mat-icon>
+            <span>Contate-nos</span>
+        </button>
+
+        <button mat-button color="primary" *ngIf="auth===false" (click)=toCadastrar()>
+            <span>Cadastrar</span>
+        </button>
+
+        <button mat-menu-item (click)="toVerAgenda()" *ngIf="auth===true && adm===true">
+            <span>Visualizar Agenda</span>
+        </button>
+
+        <button mat-menu-item (click)="toProfissionais()" *ngIf="auth===true && adm===true">
+            <span>Profissionais</span>
+        </button>
+
+        <button mat-menu-item (click)="toVerOpn()" *ngIf="auth===true && adm===true">
+            <span>Visualizar Opinioes</span>
+        </button>
+
+        <button mat-menu-item (click)="toGerarConsulta()" *ngIf="auth===true && adm===true">
+            <span>Registrar Consulta</span>
+        </button>
+
+        <button mat-menu-item (click)="toMaterial()" *ngIf="auth===true && adm===true">
+            <span>Material</span>
+        </button>
+
+        <button mat-menu-item (click)="toEstatisticas()" *ngIf="auth===true && adm===true">
+            <span>Estatísticas</span>
+        </button>
+
+        <button mat-menu-item (click)="toAgendar()" *ngIf="auth===true && adm===false">
+            <mat-icon>edit</mat-icon>
+            <span>Consulta</span>
+        </button>
+
+        <!--<button mat-menu-item (click)="toAgendar()" style="color: green;" *ngIf="auth===true && adm===false">
+            <mat-icon>edit</mat-icon>
+            <span>Agendar Consulta</span>
+        </button>
+
+        <button mat-menu-item (click)="toAltConsulta()" style="color: green;" *ngIf="auth===true && adm===false">
+            <mat-icon>edit</mat-icon>
+            <span>Alterar Consulta</span>
+        </button>
+
+        <button mat-menu-item (click)="toVerConsulta()" style="color: green;" *ngIf="auth===true && adm===false">
+            <mat-icon>visibility</mat-icon>
+            <span>Minhas Consultas</span>
+        </button>-->
+
+        <button mat-menu-item (click)="toPerfil()" *ngIf="auth===true && adm===false">
+            <span>Perfil</span>
+        </button>
+    </mat-menu>
+
+    <!--If para pag acima de 960px-->
+    <mat-toolbar style="margin: 15% 0 11% 0;" *ngIf="innerWidth >  960px">
+        <a mat-button href="home">
+            <img style="width: 75%; max-width: 300px;" src="../../../assets/img/Logo.jpeg">
+        </a>
+
+        <button mat-button (click)="toHome()"  *ngIf="adm===false">
+            <span>Home</span>
+        </button>
+
+        <button mat-button (click)="toServico()" *ngIf="adm===false">
+            <span>Serviços</span>
+        </button>
+
+        <button mat-button (click)="toCorpoClinico()" *ngIf="adm===false">
+            <span>Corpo Clinico</span>
+        </button>
+
+        <button mat-button (click)="toContateNos()" *ngIf="auth==false && adm===false">
+            <span>Contate-nos</span>
+        </button>
+
+        <button mat-button (click)="toAgendar()" *ngIf="auth===true && adm===false">
+            <span>Consultas</span>
+        </button>
+
+        <!--<button mat-button (click)="toAgendar()" style="color: green;" *ngIf="auth===true && adm===false">
+            <span>Agendar Consulta</span>
+        </button>
+
+        <button mat-button (click)="toAltConsulta()" style="color: green;" *ngIf="auth===true && adm===false">
+            <span>Alterar Consulta</span>
+        </button>
+
+        <button mat-button (click)="toVerConsulta()" style="color: green;" *ngIf="auth===true && adm===false">
+            <span>Minhas Consultas</span>
+        </button>-->
+
+        <button mat-button (click)="toVerAgenda()" *ngIf="auth===true && adm===true">
+            <span>Visualizar Agenda</span>
+        </button>
+
+        <button mat-button (click)="toGerarConsulta()" *ngIf="auth===true && adm===true">
+            <span>Registrar Consulta</span>
+        </button>
+
+        <button mat-button (click)="toMaterial()" *ngIf="auth===true && adm===true">
+            <span>Material</span>
+        </button>
+
+        <button mat-button (click)="toProfissionais()" *ngIf="auth===true && adm===true">
+            <span>Profissionais</span>
+        </button>
+
+        <button mat-button (click)="toVerOpn()" *ngIf="auth===true && adm===true">
+            <span>Visualizar Opinioes</span>
+        </button>
+
+        <button mat-button (click)="toEstatisticas()" *ngIf="auth===true && adm===true">
+            <span>Estatísticas</span>
+        </button>
+
+        <span class="example-spacer"></span>
+        <button mat-button color="primary" *ngIf="auth===false" (click)=toCadastrar()>
+            <span>Cadastrar</span>
+        </button>
+        <app-logar *ngIf="auth===false"></app-logar>
+        <button mat-button (click)="toPerfil()" *ngIf="auth===true && adm===false">
+            <span>Perfil</span>
+        </button>
+        <button mat-raised-button color="warn" *ngIf="auth===true" (click)=deslogar()>
+            <span>Logout</span>
+        </button>
+    </mat-toolbar>
+</mat-toolbar>

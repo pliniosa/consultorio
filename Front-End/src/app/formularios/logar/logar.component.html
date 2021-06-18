@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Button to open the modal login form -->
+<button mat-raised-button color="primary" onclick="document.getElementById('form').style.display='block'">Login</button>
+
+<!-- The Modal -->
+<div id="form" class="modal">
+
+    <!-- Modal Content -->
+    <form class="modal-content animate" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="imgcontainer">
+            <mat-icon>person</mat-icon>
+        </div>
+        
+        <div class="container">
+            <div>
+                <label for="email"><b>E-mail: </b></label>
+                <input type="email" formControlName="email" name="email" required>
+            </div>
+            <div>
+                <label for="psw"><b>Senha: </b></label>
+                <input type="password" formControlName="senha" name="psw" required>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit">Login</button>
+
+            <button mat-raised-button class="google btn" (click)="signInWithGoogle()"><i class="fa fa-google fa-fw"></i></button>
+            <button mat-raised-button class="fb btn" (click)="signInWithFB()"><i class="fa fa-facebook fa-fw"></i></button>
+
+            <button mat-raised-button color="warn" type="button" onclick="document.getElementById('form').style.display='none'">Cancel</button>
+        </div>
+    </form>
+</div>

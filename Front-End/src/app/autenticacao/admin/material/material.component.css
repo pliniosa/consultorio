@@ -1,0 +1,30 @@
+
+.formulario{
+    text-align: center;
+}
+.registerbtn{
+margin: 10px;
+}
+.titulo{
+text-align: center;
+margin-top: 4%;
+}
+
+.full-width {
+width: 75%;
+margin-left: 5% ;
+}
+
+.visual{
+    width: 25%;
+}
+
+table {
+width: 100%;
+}
+
+.example-card {
+    margin-left: 35%;
+    max-width: 400px;
+    text-align: center;
+}

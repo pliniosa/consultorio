@@ -1,0 +1,32 @@
+<div class="container">
+    <div style="text-align:center">
+        <h2>Contate-nos</h2>
+        <p>Passe por aqui para tomar um café ou deixe-nos uma mensagem:</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <img src="../../assets/img/Recepção.jpg" style="width:100%">
+        </div>
+        <div class="column">
+            <form class="form" (ngSubmit)="registrarOpiniao(form)" #form="ngForm">
+                <mat-form-field  appearance="fill" class="full-width">
+                  <mat-label>Nome</mat-label>
+                  <input matInput type="text" id="name" name="name" [(ngModel)]="contato.nome" required>
+                </mat-form-field>
+              
+                <mat-form-field  appearance="fill" class="full-width">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput type="tel" id="telefone" name="telefone"  minlength="11" maxlength="11" [(ngModel)]="contato.telefone" placeholder="33 912345678" required>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            
+                <mat-form-field  appearance="fill" class="full-width">
+                    <mat-label>Deixe seu comentario</mat-label>
+                    <textarea matInput placeholder="Duvidas, criticas ou elogios" type="textarea" id="opiniao" name="opiniao" maxlength="100"[(ngModel)]="contato.opiniao" required></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="primary" class="registerbtn" type="submit"[disabled]="!form.form.valid">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+

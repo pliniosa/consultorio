@@ -1,0 +1,31 @@
+<div class="pag" *ngIf="innerWidth > 960px">
+    <div class="navbar">
+        <br>
+        <img src="../../assets/img/LogoFooter.jpeg">
+        <button mat-button (click)="toCorpoClinico()">
+            Corpo Clinico
+        </button>
+        <button mat-button (click)="toServico()">
+            Serviços
+        </button>
+        <button mat-button (click)="toHome()">
+            Home
+        </button>
+    </div>
+</div>
+
+<div *ngIf="innerWidth <  960px">
+    <div class="navbar">
+        <br>
+        <img src="../../assets/img/LogoFooter.jpeg">
+        <button mat-button (click)="toHome()">
+            Home
+        </button>
+        <button mat-button (click)="toServico()">
+            Serviços
+        </button>
+        <button mat-button (click)="toCorpoClinico()">
+            Corpo Clinico
+        </button>
+    </div>
+</div>
